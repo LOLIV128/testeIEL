@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Workers</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 50%; margin-bottom: 30px; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background: #eee; }
+    </style>
+</head>
+<body>
+    <h1>Employee Dashboard</h1>
+
+    <h2>How many unique job roles do we have? and which are they? :</h2>
+    <ul>
+        <h3>{{ unique_jobs|length }}</h3>
+        {% for job in unique_jobs %}
+            <li>{{ job }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Top 5 bigger salaries:</h2>
+    <table>
+        <tr><th>Name</th><th>Wage</th></tr>
+        {% for nome, salario in top_salaries %}
+            <tr><td>{{ nome }}</td><td>R$ {{ salario }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Top 5 lower salaries:</h2>
+    <table>
+        <tr><th>Name</th><th>Wage</th></tr>
+        {% for nome, salario in low_salaries %}
+            <tr><td>{{ nome }}</td><td>R$ {{ salario }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Avg salary per job role:</h2>
+    <table>
+        <tr><th>Position</th><th>Average Salary</th></tr>
+        {% for cargo, media in avg_salaries %}
+            <tr><td>{{ cargo }}</td><td>R$ {{ media|floatformat:2 }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Which are the employees that earn the highest salaries per job role?</h2>
+    <table>
+        <tr><th>Position</th><th>Name</th><th>Wage</th></tr>
+        {% for cargo, nome, salario in top_by_role %}
+            <tr><td>{{ cargo }}</td><td>{{ nome }}</td><td>R$ {{ salario }}</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
